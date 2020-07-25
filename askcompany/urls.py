@@ -1,10 +1,15 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 최상위만 커버.
+    path('', TemplateView.as_view(template_name='root.html'), name='root'),
+    # 모든 경우 감쌀 경우 re_path
+    # re_path('', TemplateView.as_view(template_name='root.html'), name='root'),
 ]
 
 if settings.DEBUG:
