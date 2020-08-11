@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 ADMINS = [
-    ('SoJeong Han', 'btiac1129@gmail.com'),
+    ('Sojeong Han', 'btiac1129@gmail.com'),
 ]
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Third Apps
     'debug_toolbar',
     'bootstrap4',
+    'django_pydenticon',
     # Local Apps
     'accounts',
 ]
@@ -143,9 +144,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 INTERNAL_IPS = ['127.0.0.1']
 
 # Email with Send Grid
-SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-EMAIL_HOST = 'smpt.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
