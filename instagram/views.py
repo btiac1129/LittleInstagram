@@ -8,10 +8,13 @@ from .models import Post, Tag
 
 @login_required
 def index(request):
+    suggested_user_list = get_user_model().objects.all()\
+        .exclude(pk=request.user.pk)\
+        .exclude(pk__in=request.user.following_set.all())[:3]
+    
     return render(request, "instagram/index.html", {
-
+        "suggested_user_list": suggested_user_list,
     })
-    pass
 
 @login_required
 def post_new(request):
@@ -46,3 +49,4 @@ def user_page(request, username):
         "post_list": post_list,
         "post_list_count": post_list_count,
     })
+
