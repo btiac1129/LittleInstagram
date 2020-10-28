@@ -49,8 +49,10 @@ def post_new(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
     return render(request, "instagram/post_detail.html", {
         "post": post,
+        "comment_form": comment_form,
     })
 
 @login_required
