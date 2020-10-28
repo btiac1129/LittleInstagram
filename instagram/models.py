@@ -40,6 +40,11 @@ class Post(BaseModel):
     def is_like_user(self, user):
         return self.like_user_set.filter(pk=user.pk).exists()
 
+class Comment(BaseModel):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    message = models.TextField()
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
     
