@@ -17,6 +17,17 @@
                 <a href="{% url "instagram:post_like" post.pk %}" style="color: inherit;"><i class="fa fa-heart-o"></i></a>
             {% endif %}
         </div>
+
+        <div class="comment-list mt-3 mb-3">
+            {% for comment in post.comment_set.all %}
+            <div class="comment">
+                <strong>{{ comment.author }}</strong>
+                {{ comment.message }}
+                <small class="text-muted">{{ comment.created_at|naturaltime }}</small>
+            </div>
+            {% endfor %}
+        </div>
+
         <div>
             {% for tag in post.tag_set.all %}
                 <span class="badge badge-primary">#{{ tag.name }}</span>
@@ -29,6 +40,6 @@
         </div>
     </div>
     <div class="card-footer">
-        
+        <a href="{% url 'instagram:comment_new' post.pk %}">댓글 쓰기</a>
     </div>
 </div>
