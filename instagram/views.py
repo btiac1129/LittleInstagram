@@ -24,9 +24,12 @@ def index(request):
         .exclude(pk=request.user.pk)\
         .exclude(pk__in=request.user.following_set.all())[:3]
     
+    comment_form = CommentForm()
+
     return render(request, "instagram/index.html", {
         "post_list": post_list,
         "suggested_user_list": suggested_user_list,
+        "comment_form": comment_form,
     })
 
 @login_required
@@ -78,6 +81,7 @@ def post_unlike(request, pk):
 @login_required
 def comment_new(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
+
     if request.method == 'POST':
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
@@ -85,10 +89,14 @@ def comment_new(request, post_pk):
             comment.post = post
             comment.author = request.user
             comment.save()
+            if request.is_ajax():
+                return render(request, "instagram/_comment.html", {
+                    "comment": comment,
+                })
             return redirect(comment.post)
     else:
         form = CommentForm()
-    return render(request, 'instagram/comment_form.html', {
+    return render(request, "instagram/comment_form.html", {
         "form": form,
     })
 
