@@ -1,31 +1,19 @@
-<div class="d-flex p-2">
-    <div class="mr-2">
-        <img src="{{ user.avatar_url }}" style="width: 48px; height: 48px;" class="rounded-circle" />
+<div class="position-fixed">
+    <div class="mt-5 ml-5">
+        <h6 class="d-block font-weight-bold my-3">
+            Stories
+        </h6>
+        <div class="text-muted">
+            Stories from topic you follow will show up here.
+        </div>
     </div>
-    <div>
-        {{ user.username }} <br/>
-        <small class="text-muted">{{ user.name }}<small>
-    </div>
-</div>
 
-<div class="card mb-3">
-    <div class="card-header text-muted">
-        Stories
-    </div>
-    <div class="card-body text-muted">
-        Stories from people you follow will show up here.
-    </div>
-</div>
-
-<div class="card mb-3">
-    <div class="card-header text-muted">
-        Suggestions for you
-    </div>
-    <div class="card-body text-muted">
-        {% for suggested_user in suggested_user_list %}
-            {% include "instagram/timeline_sidebar_user_follow.html" %}
-        {% empty %}
-            추천 친구가 없습니다.
-        {% endfor %}
+    <div class="mt-5 ml-5">
+        <h6 class="d-block font-weight-bold my-3">
+            Suggestions for you
+        </h6>
+        <div class="text-muted">
+            {% for suggested_user in suggested_user_list %} {% include "instagram/timeline_sidebar_user_follow.html" %} {% empty %} 추천 친구가 없습니다. {% endfor %}
+        </div>
     </div>
 </div>

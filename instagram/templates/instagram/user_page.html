@@ -1,40 +1,33 @@
-{% extends 'instagram/layout.html' %}
-{% load thumbnail %}
-
-{% block content %}
-    <div class="container">
-        <div class="row pt-3 pb-3">
-            <div class="col-sm-3" style="text-align: center;">
-                <img src="{{ page_user.avatar_url }}" class="rounded-circle" style="width: 160px;"/>
-            </div>
-            <div class="col-sm-9">    
-                {{ page_user.username }}
-                <a href="{% url 'profile_edit' %}" class="btn btn-second btn-sm">
-                    Edit Profile
-                </a>
-
-                {% if is_follow %}
-                    <a href="{% url 'user_unfollow' page_user.username %}">Unfollow</a>
-                {% else %}
-                    <a href="{% url 'user_follow' page_user.username %}">Follow</a>
-
-                {% endif %}
-                <hr/>
-
-                {{ post_list_count }} posts, {{ follower_set_count }} followers, {{ following_set_count }} following
-
-                <hr/>
-
+{% extends 'instagram/layout.html' %} {% load thumbnail %} {% block contents %}
+<div class="container">
+    <div class="row pt-3 pb-3">
+        <div class="col-sm-3" style="text-align: center;">
+            <img src="{{ page_user.avatar_url }}" class="rounded-circle" style="width: 50px; height: 50px;" />
+            <div class="my-2">
                 {{ page_user.name }}
             </div>
         </div>
-        <div class="row mt-3">
-            {% for post in post_list %}
-                <div class="col-sm-4">
-                    {% comment %} <img src="{{ post.photo.url }}" alt="{{ post.caption }}" style="width: 100%;" /> {% endcomment %}
-                    <img src="{% thumbnail post.photo 256x256 crop %}" alt="{{ post.caption }}" style="width: 100%;" />
-                </div>
-            {% endfor %}
+        <div class="col-sm-9">
+            <b>{{ page_user.username }}</b> &nbsp; {% if page_user == user %}
+            <a href="{% url 'accounts:profile_edit' %}" class="text-muted">
+                프로필 편집
+            </a> &nbsp; {% endif %} {% if page_user.username != "admin" and page_user != user %} {% if is_follow %}
+            <a href="{% url 'accounts:user_unfollow' page_user.username %}">Unfollow</a> {% else %}
+            <a href="{% url 'accounts:user_follow' page_user.username %}">Follow</a> {% endif %} {% endif %}
+            <hr/>
+            <b>{{ post_list_count }}</b> posts &nbsp;
+            <b>{{ follower_set_count }}</b> followers &nbsp;
+            <b>{{ following_set_count }}</b> following
         </div>
-    </div>                
-{% endblock content %}
+    </div>
+    <div class="row mt-3">
+        {% for post in post_list %}
+        <div class="col-sm-4 my-3">
+            {% comment %} <img src="{{ post.photo.url }}" alt="{{ post.caption }}" style="width: 100%;" /> {% endcomment %}
+            <a href="{% url 'instagram:post_detail' post.id %}"><img src="{% thumbnail post.photo 500x500 crop %}" alt="{{ post.caption }}" style="width: 100%;" /></a>
+        </div>
+        {% empty %}
+        <div class="pl-3 my-3 text-muted">새 포스팅이 없습니다.</div> {% endfor %}
+    </div>
+</div>
+{% endblock contents %}

@@ -1,0 +1,83 @@
+:root {
+    --main-bg-color: linear-gradient(90deg, #fd1d1d, #ec329c);
+    --follower-bg-color: linear-gradient(90deg, #C4E0E5, #4CA1AF);
+    --following-bg-color: linear-gradient(90deg, #4CA1AF, #C4E0E5);
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-size: 14px;
+}
+
+.btn {
+    height: 31px;
+    background: var(--main-bg-color);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, .25);
+    outline: none;
+    font-size: 12px;
+    color: white;
+}
+
+.btn-follower {
+    background: var(--follower-bg-color) !important;
+}
+
+.btn-following {
+    background: var(--following-bg-color) !important;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.btn:focus {
+    box-shadow: none;
+    color: white;
+}
+
+input {
+    /* width: px; */
+    height: 31px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    border: rgba(0, 0, 0, .25) 1px solid;
+    border-radius: 20px;
+    background-color: #fafafa;
+    font-size: 12px;
+}
+
+.form-control {
+    font-size: 12px;
+}
+
+input:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+a,
+a:hover,
+a:visited {
+    text-decoration: none;
+}
+
+.contents {}
+
+.timeline-sidebar {
+    margin-top: 30px;
+}
+
+@media screen and (min-width: 1200px) {
+    .profile-sidebar {
+        border-right: 1px solid rgba(0, 0, 0, .1);
+    }
+    .timeline-sidebar {
+        margin-top: 1rem;
+        border-left: 1px solid rgba(0, 0, 0, .1);
+    }
+}

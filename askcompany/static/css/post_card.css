@@ -1,0 +1,23 @@
+.card-header {
+    background-color: white;
+    border-bottom: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="file"] {
+    padding-left: 20px;
+    padding-top: 2.5px;
+}
+
+input[type="textarea"]:focus,
+input[type="text"]:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+input#file-upload-button {
+    border-radius: 20px;
+}

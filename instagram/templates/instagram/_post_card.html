@@ -1,35 +1,40 @@
-{% load bootstrap4 humanize instagram_tags %}
+{% load static bootstrap4 humanize instagram_tags %}
 
-<div class="card">
+<!-- -->
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/post_card.css' %}" /> {% endblock %}
+
+<div class="card my-3">
     <div class="card-header">
-        <img src="{{ post.author.avatar_url }}" style="width: 32px;" />
-        <a href="{% url 'instagram:user_page' post.author.username %}">
+        <img src="{{ post.author.avatar_url }}" style="width: 32px; height: 32px;" class="rounded-circle" />
+        <a href="{% url 'instagram:user_page' post.author.username %}" class="ml-2 font-weight-bold">
             {{ post.author.name }}
         </a>
     </div>
     <div class="card-body">
-        <img src="{{ post.photo.url }}" style="width: 100%;"/>
+        <img src="{{ post.photo.url }}" style="width: 100%;" class="rounded mb-2" />
 
         <div>
             {% if post|is_like_user:user %}
-                <a href="{% url "instagram:post_unlike" post.pk %}" style="color: inherit;"><i class="fa fa-heart"></i></a>
-            {% else %}
-                <a href="{% url "instagram:post_like" post.pk %}" style="color: inherit;"><i class="fa fa-heart-o"></i></a>
-            {% endif %}
+            <a href="{% url 'instagram:post_unlike' post.pk %}" style="color: red;"><i class="fa fa-heart"></i></a> {% else %}
+            <a href="{% url 'instagram:post_like' post.pk %}" style="color: inherit;"><i class="fa fa-heart-o"></i></a> {% endif %} {{ post.like_user_set.c }}
+            <!-- -->
+            <small><b>{{ post|count_like }}명</b>이 좋아합니다.</small>
+        </div>
+
+        <div class="mt-2">
+            {{ post.caption }}
         </div>
 
         <div id="post-{{ post.pk }}-comment-list" class="comment-list mt-3 mb-3">
-            {% for comment in post.comment_set.all %}
-                {% include "instagram/_comment.html" %}
-            {% endfor %}
+            {% for comment in post.comment_set.all %} {% include "instagram/_comment.html" %} {% endfor %}
         </div>
 
         <div>
             {% for tag in post.tag_set.all %}
-                <span class="badge badge-primary">#{{ tag.name }}</span>
-            {% endfor %}
+            <span class="badge badge-primary">#{{ tag.name }}</span> {% endfor %}
         </div>
-        <div> 
+        <div>
             <a href="{{ post.get_absolute_url }}" class="text-muted">
                 <small>{{ post.created_at|naturaltime }}</small>
             </a>
@@ -37,35 +42,34 @@
     </div>
     <div class="card-footer">
         <form id="post-{{ post.pk }}-comment-form" action="{% url 'instagram:comment_new' post.pk %}" method="POST">
-            {% csrf_token %}
-            {% bootstrap_form comment_form %}
+            {% csrf_token %} {% bootstrap_form comment_form %}
             <input type="submit" value="댓글 쓰기" class="btn btn-primary btn-block" />
         </form>
 
 
         <script>
-        $(function() {
-            var form_id = "post-{{ post.pk }}-comment-form";
-            $("#" + form_id).submit(function(e) {
-                e.preventDefault();
+            $(function() {
+                var form_id = "post-{{ post.pk }}-comment-form";
+                $("#" + form_id).submit(function(e) {
+                    e.preventDefault();
 
-                var options = {
-                    //target: "#post-{{ post.pk }}-comment-list",
-                    success: function(responseText, statusText, xhr, $form) {
-                        console.group("ajaxSubmit response");
-                        console.log(responseText);
-                        console.log(statusText);
-                        console.log(xhr);
-                        console.log($form);
-                        console.groupEnd();
+                    var options = {
+                        //target: "#post-{{ post.pk }}-comment-list",
+                        success: function(responseText, statusText, xhr, $form) {
+                            console.group("ajaxSubmit response");
+                            console.log(responseText);
+                            console.log(statusText);
+                            console.log(xhr);
+                            console.log($form);
+                            console.groupEnd();
 
-                        $("#post-{{ post.pk }}-comment-list").prepend(responseText);
-                    }
-                };
-                $(this).ajaxSubmit(options);
+                            $("#post-{{ post.pk }}-comment-list").prepend(responseText);
+                        }
+                    };
+                    $(this).ajaxSubmit(options);
+                });
+                console.log("document ready.");
             });
-            console.log("document ready.");
-        });
         </script>
     </div>
 </div>

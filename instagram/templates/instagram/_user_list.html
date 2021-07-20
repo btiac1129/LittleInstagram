@@ -1,0 +1,21 @@
+{% load bootstrap4 %}
+
+<div class="container">
+    {% if list_title %}
+    <h6>{{ list_title }}</h6>
+    {% endif %}
+    <div class="row my-3">
+        <div class="d-flex justtify-content-between mb-3">
+            {% for user in users %}
+            <div class="col-2">
+                <img src="{{ user.avatar_url }}" style="width: 40px; height: 40px;" class="rounded-circle" />
+                <div class="text-center mt-2">
+                    <a href="{% url 'instagram:user_page' user.username %}">
+                        {{ user.username }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -2,25 +2,28 @@
 
 <div class="card">
     {% if form_title %}
-        <div class="card-header">
-            {{ form_title }}
+    <div class="card-header font-weight-bold">
+        {{ form_title }}
+        <div class="mt-3">{% if form_title == "로그인" %}
+            <small class="text-muted">리틀 포레스트는 가입이 승인된 회원만 사용 가능합니다.</small> {% endif %}
         </div>
+    </div>
     {% endif %}
     <div class="card-body">
         {% if form %}
-            <form action="" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                {% buttons %}
-                <button type='submit' class='btn btn-primary'>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+            <button type='submit' class='btn btn-primary'>
                     {{ submit_label|default:"Submit" }}
-                </button>
-                {% endbuttons %}
-            </form>
+            </button> {% endbuttons %}
+            <div class="mt-3">{% if form_title == "로그인" %}
+                <small class="text-muted">아직 가입하지 않았다면 먼저 <a href="../signup/"><b>회원가입</b></a>을 해주세요.</small> {% endif %}
+            </div>
+        </form>
         {% else %}
-            <div class="alert alert-danger">
-                form 객체를 지정해주세요.
-            </div
+        <div class="alert alert-danger">
+            form 객체를 지정해주세요.
+        </div>
         {% endif %}
     </div>
 </div>

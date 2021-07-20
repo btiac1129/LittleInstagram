@@ -1,0 +1,45 @@
+<div class="d-xs-flex d-sm-flex d-md-flex d-lg-flex justify-content-around d-xl-block">
+    <div class="my-5 ml-sm-0 ml-md-0 ml-lg-5">
+        <button class="btn btn-follower" type="button" data-toggle="collapse" data-target="#collapseFollower" aria-expanded="false" aria-controls="collapseFollower">
+            나를 팔로우한 계정
+        </button>
+        <div class="collapse" id="collapseFollower">
+            {% for following in following_set_list %}
+            <div class="text-muted mt-3">
+                <div class="d-flex mb-1">
+                    <div class="mr-3">
+                        <img src="{{ following.avatar_url }}" style="width: 28px; height: 28px;" class="rounded-circle" />
+                    </div>
+                    <div class="">
+                        <a href="{% url 'instagram:user_page' following.username %}">
+                        {{ following.username }}
+                    </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %} 내가 팔로우한 계정이 없습니다. {% endfor %}
+        </div>
+    </div>
+
+    <div class="my-5 ml-sm-0 ml-md-0 ml-lg-5">
+        <button class="btn btn-following" type="button" data-toggle="collapse" data-target="#collapseFollowing" aria-expanded="false" aria-controls="collapseFollowing">
+            내가 팔로우한 계정
+        </button>
+        <div class="collapse" id="collapseFollowing">
+            {% for follower in follower_set_list %}
+            <div class="text-muted mt-3">
+                <div class="d-flex mb-1">
+                    <div class="mr-3">
+                        <img src="{{ follower.avatar_url }}" style="width: 32px; height: 32px;" class="rounded-circle" />
+                    </div>
+                    <div class="">
+                        <a href="{% url 'instagram:user_page' follower.username %}">
+                        {{ follower.username }}
+                    </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %} 나를 팔로우한 계정이 없습니다. {% endfor %}
+        </div>
+    </div>
+</div>

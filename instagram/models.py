@@ -40,6 +40,9 @@ class Post(BaseModel):
     def is_like_user(self, user):
         return self.like_user_set.filter(pk=user.pk).exists()
 
+    def count_like(self):
+        return self.like_user_set.count();    
+
 class Comment(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

@@ -1,0 +1,18 @@
+{% extends "instagram/layout.html" %} {% load static %}
+
+<!-- -->
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/explore.css' %}" /> {% endblock %}
+
+<!-- -->
+{% block contents %}
+<h5 class="my-4 font-weight-bold">Explore</h5>
+
+<div class="">{% include 'instagram/_user_list.html' with list_title="Official Categories" users=superuser_list %}</div>
+
+<div class="">{% include 'instagram/_user_list.html' with list_title="Little Forest Members" user=staff_list %}</div>
+
+<div class="">{% include 'instagram/_user_list.html' with list_title="Our Guests" users=user_list %}</div>
+{% endblock %}
+<!-- -->
+{% block timeline_sidebar %} {% include "instagram/timeline_sidebar.html" %} {% endblock %}

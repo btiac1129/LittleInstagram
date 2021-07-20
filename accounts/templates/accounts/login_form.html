@@ -1,13 +1,13 @@
-{% extends 'accounts/layout.html' %}
+{% extends 'accounts/layout.html' %} {% load static %}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 offset-3">
-            {% include '_form.html' with form_title="로그인" submit_label='로그인' %}
-        </div>
-    </div>
+<!-- -->
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/post_card.css' %}" /> {% endblock %}
+
+
+<!-- -->
+{% block contents %}
+<div class="col-lg-10 offset-1">
+    {% include '_form.html' with form_title="로그인" submit_label='로그인' %}
 </div>
-
-{% endblock content %}
-
+{% endblock contents %}

@@ -1,12 +1,8 @@
-{% extends 'accounts/layout.html' %}
+{% extends 'accounts/layout.html' %} {% load static %}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 offset-3">
-            {% include '_form.html' with form_title="회원가입" submit_label='회원가입' %}
-        </div>
-    </div>
-</div>
+<!-- -->
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/post_card.css' %}" /> {% endblock %}
 
-{% endblock content %}
+<!-- -->
+{% block contents %} {% if user.is_authenticated == False %} {% include '_form.html' with form_title="회원가입" submit_label='회원가입' %} {% endif %} {% endblock contents %}

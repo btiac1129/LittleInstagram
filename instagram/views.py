@@ -11,7 +11,8 @@ from .models import Post, Tag
 
 @login_required
 def index(request):
-    timesince = timezone.now() - timedelta(days=3)
+    timesince = timezone.now() - timedelta(days=10)
+    
     post_list = Post.objects.all()\
         .filter(
             Q(author=request.user) |
@@ -20,16 +21,41 @@ def index(request):
         .filter(
             created_at__gte = timesince
         )
+
     suggested_user_list = get_user_model().objects.all()\
         .exclude(pk=request.user.pk)\
         .exclude(pk__in=request.user.following_set.all())[:3]
     
-    comment_form = CommentForm()
+    following_set_list = request.user.following_set.all()
+    follower_set_list = request.user.follower_set.all()
 
+    comment_form = CommentForm()
+    
     return render(request, "instagram/index.html", {
         "post_list": post_list,
         "suggested_user_list": suggested_user_list,
+        "following_set_list": following_set_list,
+        "follower_set_list": follower_set_list,
         "comment_form": comment_form,
+    })
+
+@login_required
+def user_explore(request):
+    user_all = get_user_model().objects.all()
+    superuser_list, staff_list, user_list = [], [], []
+
+    for user in user_all:
+        if user.is_superuser:
+            superuser_list.append(user)
+        elif user.is_staff:
+            staff_list.append(user)
+        else:
+            user_list.append(user)
+
+    return render(request, "instagram/explore.html", {
+        "superuser_list": superuser_list,
+        "staff_list": staff_list,
+        "user_list": user_list,
     })
 
 @login_required
@@ -46,8 +72,13 @@ def post_new(request):
     else:
         form = PostForm()
     
+    suggested_user_list = get_user_model().objects.all()\
+        .exclude(pk=request.user.pk)\
+        .exclude(pk__in=request.user.following_set.all())[:3]
+
     return render(request, 'instagram/post_form.html', {
         "form": form,
+        "suggested_user_list": suggested_user_list,
     })
 
 def post_detail(request, pk):
