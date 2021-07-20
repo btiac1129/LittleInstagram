@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third Apps
-    'debug_toolbar',
     'bootstrap4',
     'django_pydenticon',
     'easy_thumbnails',
