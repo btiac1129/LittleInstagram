@@ -26,7 +26,7 @@ SECRET_KEY = 'bu6zu*!z6b9ix8b-tk8-*l)soelh(q4r0(*!3^8v^c5f-5elh^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'btiac1129.pythonanywhere.com']
 
 ADMINS = [
     ('Sojeong Han', 'btiac1129@gmail.com'),
