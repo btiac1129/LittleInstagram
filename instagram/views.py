@@ -17,10 +17,10 @@ def index(request):
         .filter(
             Q(author=request.user) |
             Q(author__in=request.user.following_set.all()) 
-        )\
-        .filter(
-            created_at__gte = timesince
-        )
+        )# )\
+        # .filter(
+        #     created_at__gte = timesince
+        # )
 
     suggested_user_list = get_user_model().objects.all()\
         .exclude(pk=request.user.pk)\
