@@ -1,7 +1,9 @@
 # LittleInstagram
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3cafacff-c506-462c-98a5-3433d9b7f6e2/Blog_Banner_560x315_px_-_Pinterest_Graphic.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3cafacff-c506-462c-98a5-3433d9b7f6e2/Blog_Banner_560x315_px_-_Pinterest_Graphic.png)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e73f5bf0-6fe0-4cf7-8e67-4141c68a237f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e73f5bf0-6fe0-4cf7-8e67-4141c68a237f/Untitled.png)
+![Blog Banner 560x315 px - Pinterest Graphic](https://user-images.githubusercontent.com/65053379/128138854-e37d5f06-0863-4a67-8f96-6e73621da664.png)
+
+![Group 3](https://user-images.githubusercontent.com/65053379/128138713-365a6d4e-5f31-4941-884c-2994a7383215.png)
+
 
 ### 개발 스택
 
